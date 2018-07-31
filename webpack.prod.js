@@ -1,11 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
+const merge = require('webpack-merge');
+const common = require('./webpack.common.js');
 
-module.exports = {
-  entry: [
-    'react-hot-loader/patch',
-    './src/index.js'
-  ],
+module.exports = merge(common, {
+  mode:'production',
   module: {
     rules: [
       {
@@ -46,15 +45,9 @@ module.exports = {
     }
   },
   output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
-    filename: 'bundle.js'
+    publicPath: './'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
-  ],
-  devServer: {
-    contentBase: './dist',
-    hot: true
-  }
-};
+  ]
+});
